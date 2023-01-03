@@ -1,4 +1,4 @@
-package filesSummarise;
+package filesummaryui;
 
 public class FileSummaryService {
 }

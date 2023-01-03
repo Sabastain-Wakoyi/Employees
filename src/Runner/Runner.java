@@ -1,14 +1,14 @@
-package runners;
+package Runner;
 
-import filesSummarise.IfFileSummarise;
-import utils.readUtils;
+import filesummaryui.IfFileSummarise;
+import util.ReadUtil;
 
-public class Runners<List, Employees> {
-    private readUtils m_readUtils;
+public class Runner<List, Employees> {
+    private ReadUtil m_readUtils;
     private IfFileSummarise m_ifFileSummarise;
 
-    public Runners(){
-        m_readUtils = new readUtils();
+    public Runner(){
+        m_readUtils = new ReadUtil();
         m_ifFileSummarise = new IfFileSummarise(){};
 
         UserOptions();

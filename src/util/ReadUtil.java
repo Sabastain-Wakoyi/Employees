@@ -1,6 +1,6 @@
-package utils;
+package util;
 
-public class readUtils {
+public class ReadUtil {
 
 private BufferedReader reader;
 
