@@ -1,7 +1,8 @@
 package filesummaryui;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface IfFileSummarise {
-    void processFile();
+   public void processFile() throws IOException;
 }

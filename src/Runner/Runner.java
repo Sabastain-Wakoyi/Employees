@@ -4,13 +4,14 @@ import filesummaryui.FileSummaryService;
 import filesummaryui.IfFileSummarise;
 import util.ReadUtil;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Runner {
     private ReadUtil m_readUtils;
     private IfFileSummarise m_ifFileSummarise;
 
-    public Runner(){
+    public Runner() throws IOException {
         m_readUtils = new ReadUtil();
         m_ifFileSummarise = new FileSummaryService();
 
@@ -18,7 +19,7 @@ public class Runner {
 
         }
 
-    private  void UserOptions() {
+    private  void UserOptions() throws IOException {
         int choice = 0;
 
         do {
