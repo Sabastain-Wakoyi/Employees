@@ -66,18 +66,20 @@ package filesummaryservice;
 import bean.callSummary;
 import util.ReadUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileSummaryServiceImpl implements IFileSummaryService{
+public class FileSummaryServiceImpl<callSummaryList> implements IFileSummaryService {
 
     ReadUtil readUtil;
 
-    public FileSummaryServiceImpl(){
+    public FileSummaryServiceImpl() {
         readUtil = new ReadUtil();
     }
 
@@ -87,13 +89,41 @@ public class FileSummaryServiceImpl implements IFileSummaryService{
 
         List<callSummary> callSummaryList = new ArrayList<>();
         List<String> filteredLines = new ArrayList<>();
+        File path = null;
         List<String> allLines = Files.readAllLines(Paths.get(path.getAbsolutePath()), Charset.defaultCharset());
-        allLines.forEach(x->{
+        allLines.forEach(x -> {
             callSummaryList summary = buildCallSummary(x);
-            if(summary!=null){
+            if (summary != null) {
+                callSummary callSummary = new callSummary();
                 callSummaryList.add(callSummary);
             }
         });
         return callSummaryList;
     }
+
+
+    @Override
+    public String saveToFile(List<callSummary> processFile) {
+        StringBuffer stringBuffer = new StringBuffer();
+        String savePath = readUtil.readString("Please enter the path where you want to save ", "error");
+        File file = new File(savePath);
+        if (file.isDirectory()) {
+            processFile.forEach(x -> {
+                stringBuffer.append(x.toString());
+            });
+
+            try {
+                Files.write(Paths.get(file.getAbsolutePath() + "\\" + LocalDate.now()), stringBuffer.toString().getBytes());
+            } catch (Exception e) {
+                return "The file was not saved due to " + e.getMessage();
+            }
+        }
+
+        return "The output file is saved at " + file.getAbsolutePath();
+    }
 }
+
+
+
+
+
