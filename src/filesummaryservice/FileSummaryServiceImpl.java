@@ -125,5 +125,36 @@ public class FileSummaryServiceImpl<callSummaryList> implements IFileSummaryServ
 
 
 
+    private <CallSummary> CallSummary buildCallSummary(String x) {
+        CallSummary callSummary=null;
+        String [] cols = x.split("\\s+");
+        if (cols.length==8){
+            callSummary  = new callSummary();
+            callSummary.setSrNo(cols[0]);
+            callSummary.setExt(cols[1]);
+            callSummary.setJun(cols[2]);
+            callSummary.setDirectoryNo(cols[3]);
+            callSummary.setDate(cols[4]);
+            callSummary.setTime(cols[5]);
+            callSummary.setDuration(cols[6]);
+            callSummary.setBillAmt(cols[7]);
+        }
+        // we will a few more cases later
+        return callSummary;
+    }
+
+    private boolean isValidLine(String x){
+        try{
+        Integer.parseInt(x.split("\\s+")[0]);
+        return true;
+        }catch(NumberFormatException nFe){
+        return false;
+        }
+        catch(Exception nFe){
+        return false;
+        }
+        }
+
+
 
 
