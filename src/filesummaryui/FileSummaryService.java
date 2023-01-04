@@ -11,6 +11,10 @@ public class FileSummaryService implements IfFileSummarise{
         this.ifFileSummarise = new FileSummaryService();
     }
 
+    public FileSummaryService() {
+
+    }
+
     @Override
     public void processFile() {
 
